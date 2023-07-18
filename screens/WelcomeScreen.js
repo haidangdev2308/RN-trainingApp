@@ -1,14 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import { 
   Text, 
   View, 
   Image, 
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { images, icons } from "../constants";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { UiButton } from "../components";  
+
 const WelcomeScreen = () => {
+
+  const [accountTypes, setActiveAccount] = useState([
+    {
+      name: 'Influencer',
+      isSelected: true
+    },
+    {
+      name: 'Business',
+      isSelected: false
+    },
+    {
+      name: 'Individual',
+      isSelected: false 
+    }
+  ])
 
   return (
     <View className="bg-white flex-[100]">
@@ -36,17 +52,22 @@ const WelcomeScreen = () => {
           <Text className="uppercase font-extrabold text-white">HaiDangBlog.co !</Text>
           <Text>Please select your account type</Text>
         </View>
-        <View className="flex-[40]  flex justify-evenly items-center">
-          <TouchableOpacity className="items-center justify-center border-white rounded-md border-[2px] p-4 w-[300px]">
-            <Icon name="circle" color='black' size='10'></Icon>
-            <Text className="font-medium text-white">Influence</Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="items-center justify-center border-white rounded-md border-[2px] p-4 w-[300px]">
-            <Text className="font-medium text-white">Influence</Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="items-center justify-center border-white rounded-md border-[2px] p-4 w-[300px]">
-            <Text className="font-medium text-white">Influence</Text>
-          </TouchableOpacity>
+        <View className="flex-[40] items-center ">
+          {
+            accountTypes.map((item,index) => 
+              <UiButton onPress={()=> 
+              {//tạo biến là mảng mới sao chép mảng cũ, nếu giống name thì select
+                  let newAccountTypes = accountTypes.map( newItem =>
+                    {return {
+                            ...newItem,
+                            isSelected: newItem.name == item.name
+                            }
+                    }
+                  )
+                  setActiveAccount(newAccountTypes)
+              }} key={index} title={item.name} isSelected={item.isSelected}/>
+            )
+          }
         </View>
         <View className="flex-[20] "></View>
       </ImageBackground>
