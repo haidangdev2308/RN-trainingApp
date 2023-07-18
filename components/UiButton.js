@@ -5,6 +5,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons/faCircleCheck'
 import React from 'react'
+import {colors} from '../constants'
 
 const UiButton = (props) => {
   const {onPress, title, isSelected} = props
@@ -19,7 +20,7 @@ const UiButton = (props) => {
         {isSelected && <FontAwesomeIcon icon={ faCircleCheck } style={{position: 'absolute', left: 10, top: 17}} color="green" size={20}/>}
         <Text style={{
           fontWeight: '700',
-          color: isSelected?"#0462E4":null
+          color: isSelected?colors.primaryColor:null
         }}>{title}</Text>
     </TouchableOpacity>
   )

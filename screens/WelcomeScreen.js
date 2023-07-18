@@ -69,7 +69,15 @@ const WelcomeScreen = () => {
             )
           }
         </View>
-        <View className="flex-[20] "></View>
+        <View className="flex-[20] items-center">
+          <UiButton title={"Login".toUpperCase()} />
+          <Text>Want to register new account?</Text>
+          <TouchableOpacity onPress={() => {
+            alert('nhấn đăng ký')
+          }}>
+            <Text className="underline font-medium">Register</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   )
