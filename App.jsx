@@ -1,11 +1,12 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
-import WelcomeScreen from './screens/WelcomeScreen';
+import {WelcomeScreen, Login} from "./screens"
 
 const App = () => {
 
   return (
-    <WelcomeScreen/>
+    // <WelcomeScreen/>
+    <Login></Login>
   )
 }
 
