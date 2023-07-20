@@ -10,22 +10,25 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import { images, icons, colors } from "../constants";
-import { isValidEmail, isValidPassword } from '../Utilies/Validations'
+import { isValidEmail, isValidPassword, isValidRePassword } from '../Utilies/Validations'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const Login = () => {
+const Register = () => {
 
   const [keyboardIsShown, setKeyboardIsShown] = useState(false)
   //biến lỗi email, pw
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
+  const [errorRePassword, setErrorRePassword] = useState('')
   //biến email, pw
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rePassword, setRePassword] = useState('')
   //biến xac nhan valid
   const isValidationSuccess = () => {
     return email.length > 0 && password.length > 0
       && isValidEmail(email) && isValidPassword(password)
+      && isValidRePassword(rePassword, password)
   }
 
   useEffect(() => {
@@ -38,12 +41,14 @@ const Login = () => {
   })
 
   return (
-    <KeyboardAwareScrollView className="flex-[100] bg-white p-5">
-      <View className="flex-row items-center justify-center flex-[35] mb-6">
-        <Text className="flex-1 font-bold text-[30px] text-[#333333]">Already have an account? </Text>
+    <KeyboardAwareScrollView className="flex-[100] p-5"
+      style={{ backgroundColor: colors.primaryColor }}
+    >
+      <View className="flex-row items-center justify-center flex-[30] mb-4">
+        <Text className="flex-1 font-bold text-[30px] text-[#fff]">Here's your first step with us!</Text>
         <Image className="flex-1 w-[5px] h-[200px]" source={images.computer} />
       </View>
-      <View className="flex-[25]">
+      <View className="flex-[50] bg-white p-4 rounded-xl">
         <Text style={{
           color: colors.primaryColor,
           fontSize: 16,
@@ -79,11 +84,27 @@ const Login = () => {
         <View className="h-5 ">
           <Text className="text-red-500 font-medium">{errorPassword}</Text>
         </View>
-      </View>
-      {
-        keyboardIsShown == false &&
-        <View className="flex-[40]">
-          <View className=" items-center gap-2 mt-8">
+        <Text style={{
+          color: colors.primaryColor,
+          fontSize: 16,
+          fontWeight: 600
+        }}>Retype password:</Text>
+        <TextInput
+          onChangeText={(text) => {
+            setErrorRePassword(isValidRePassword(text, password) ? '' : 'Password do NOT match')
+            setRePassword(text)
+          }}
+          className="text-black text-[16px] font-medium"
+          placeholderTextColor={colors.placeholder}
+          secureTextEntry={true}
+          placeholder="Re-enter your password" />
+        <View className="h-[1px] bg-teal-500 w-full"></View>
+        <View className="h-5 ">
+          <Text className="text-red-500 font-medium">{errorRePassword}</Text>
+        </View>
+        {
+          keyboardIsShown == false &&
+          <View className=" items-center gap-2 mt-4 mb-1">
             <TouchableOpacity
               disabled={isValidationSuccess() == false}
 
@@ -99,22 +120,20 @@ const Login = () => {
                 width: '65%',
                 alignSelf: 'center'
               }}>
-              <Text onPress={() => { }} className="text-white font-medium">Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => { alert('nhan dang ki') }}
-            >
-              <Text style={{
-                color: colors.primaryColor,
-                fontWeight: 500,
-              }}>New user? Register now</Text>
+              <Text onPress={() => { }} className="text-white font-medium">Register</Text>
             </TouchableOpacity>
           </View>
+        }
+      </View>
+      {
+        keyboardIsShown == false &&
+        <View className="flex-[20]">
+
           <View className=" mt-[50px]">
             <View className="flex-row items-center justify-center mx-12">
-              <View className="h-[1px] bg-black flex-1"></View>
-              <Text className="text-[#333] text-[14px] font-normal p-2">Other methods?</Text>
-              <View className="h-[1px] bg-black flex-1"></View>
+              <View className="h-[1px] bg-white flex-1"></View>
+              <Text className="text-[#fff] text-[14px] font-normal p-2">Other methods?</Text>
+              <View className="h-[1px] bg-white flex-1"></View>
             </View>
             <View className="flex-row gap-6 justify-center">
               <TouchableOpacity
@@ -133,6 +152,7 @@ const Login = () => {
       }
     </KeyboardAwareScrollView>
   )
+
 }
 
-export default Login
+export default Register
