@@ -8,11 +8,13 @@ import {
     TextInput,
     Keyboard,
     ScrollView,
-    FlatList
+    FlatList,
+    SafeAreaView
 } from "react-native";
 import { images, icons, colors } from "../../constants";
 import FoodItem from "./FoodItem";
-
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faMagnifyingGlass, faFilter } from '@fortawesome/free-solid-svg-icons'
 
 const FoodList = () => {
 
@@ -129,11 +131,41 @@ const FoodList = () => {
         },
     ])
 
+    const [searchText, setSearchText] = useState('')
+    const filteredFoods = () => foods.filter(eachFood => eachFood.name.toLowerCase()
+        .includes(searchText.toLowerCase()))
+
 
     return (
-        <View className="flex-1 bg-white">
+        <SafeAreaView className="flex-1 bg-white">
             <View className="flex-1">
-                <View className='h-[50px]'>
+                <View className='h-[70px] flex-row p-4 items-center justify-center'>
+                    <FontAwesomeIcon
+                        icon={faMagnifyingGlass}
+                        size={20} color={'black'}
+                        style={{
+                            position: 'absolute',
+                            top: 26,
+                            left: 24
+                        }}
+                    />
+                    <TextInput
+                        autoCorrect={false}
+                        onChangeText={(text) => {
+                            setSearchText(text)
+                        }}
+                        style={{
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            height: 40,
+                            flex: 1,
+                            marginEnd: 8,
+                            borderRadius: 5,
+                            opacity: 0.8,
+                            paddingStart: 30,
+                            fontSize: 16,
+                            fontWeight: '500'
+                        }} />
+                    <FontAwesomeIcon icon={faFilter} size={30} color={'black'} />
                 </View>
                 <View style={{
                     height: 100,
@@ -178,20 +210,27 @@ const FoodList = () => {
                     </FlatList>
                     <View style={{ height: 2, backgroundColor: colors.disable }} />
                 </View>
+                {filteredFoods().length > 0 ? <FlatList
 
-                <FlatList
-                    removeClippedSubviews={true}
-                    data={foods}
+                    data={filteredFoods()}
                     renderItem={({ item }) => <FoodItem
                         onPress={() => {
                             alert(`You press item's name: ${item.name}`)
                         }}
                         food={item} key={item.name} />}
                     keyExtractor={item => item.name}
-                />
-
+                /> : <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Text style={{
+                        color: 'black',
+                        fontSize: 25
+                    }}>No food found</Text>
+                </View>}
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
