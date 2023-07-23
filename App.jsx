@@ -4,7 +4,9 @@ import {
   WelcomeScreen,
   Login , 
   Register,
-  FoodList
+  FoodList,
+  ProductListView, 
+  Settings
 } from "./screens"
 
 const App = () => {
@@ -13,7 +15,9 @@ const App = () => {
     // <WelcomeScreen/>
     // <Login/>
     // <Register/>
-    <FoodList/>
+    // <FoodList/>
+    // <ProductListView/>
+    <Settings/>
   )
 }
 

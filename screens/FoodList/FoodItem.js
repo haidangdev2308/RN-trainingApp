@@ -46,7 +46,7 @@ const FoodItem = (props) => {
                     uri: food.img
                 }} />
             <View className="ml-3 flex-1">
-                <Text className="h-[22px] text-black font-bold text-[15px] overflow-hidden">{food.name}</Text>
+                <Text numberOfLines={1} ellipsizeMode="tail" className=" text-black font-bold text-[15px]">{food.name}</Text>
                 <View className="bg-black h-[1px] w-full"></View>
                 <View className="flex-row gap-1">
                     <Text style={{ color: colors.disable, fontSize: 15 }}>Status:</Text>
