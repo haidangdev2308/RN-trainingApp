@@ -8,7 +8,8 @@ import {
   ProductListView, 
   Settings
 } from "./screens"
-
+// import UiTab from "./navigation/UiTab";
+import AppTab from "./navigation/AppTab";
 const App = () => {
 
   return (
@@ -17,7 +18,8 @@ const App = () => {
     // <Register/>
     // <FoodList/>
     // <ProductListView/>
-    <Settings/>
+    // <Settings/>
+    <AppTab/>
   )
 }
 
