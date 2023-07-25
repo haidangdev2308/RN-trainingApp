@@ -13,15 +13,15 @@ import { images, icons, colors } from "../constants";
 import { isValidEmail, isValidPassword } from '../Utilies/Validations'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const Login = () => {
+const Login = (props) => {
 
   const [keyboardIsShown, setKeyboardIsShown] = useState(false)
   //biến lỗi email, pw
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
   //biến email, pw
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('hd12345@gmail.com')
+  const [password, setPassword] = useState('12345')
   //biến xac nhan valid
   const isValidationSuccess = () => {
     return email.length > 0 && password.length > 0
@@ -37,6 +37,11 @@ const Login = () => {
     })
   })
 
+  //lấy prop từ navigation
+  const { navigation, route } = props
+  //hàm có sẵn từ navigation
+  const { navigate, goBack } = navigation
+
   return (
     <KeyboardAwareScrollView className="flex-[100] bg-white p-5">
       <View className="flex-row items-center justify-center flex-[35] mb-6">
@@ -50,6 +55,7 @@ const Login = () => {
           fontWeight: 600
         }}>Email:</Text>
         <TextInput
+          value="hd12345@gmail.com"
           onChangeText={(text) => {
             setErrorEmail(isValidEmail(text) ? '' : 'Email is not in correct format')
             setEmail(text)
@@ -67,6 +73,7 @@ const Login = () => {
           fontWeight: 600
         }}>Password:</Text>
         <TextInput
+          value="12345"
           onChangeText={(text) => {
             setErrorPassword(isValidPassword(text) ? '' : 'Password must be at least 3 characters')
             setPassword(text)
@@ -87,9 +94,7 @@ const Login = () => {
             <TouchableOpacity
               disabled={isValidationSuccess() == false}
 
-              onPress={() => {
-                alert('aaa')
-              }}
+              onPress={() => { navigate('UiTab') }}
               style={{
                 backgroundColor: isValidationSuccess() == true ? colors.primaryColor : colors.disable,
                 borderRadius: 20,
@@ -99,10 +104,10 @@ const Login = () => {
                 width: '65%',
                 alignSelf: 'center'
               }}>
-              <Text onPress={() => { }} className="text-white font-medium">Login</Text>
+              <Text className="text-white font-medium">Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => { alert('nhan dang ki') }}
+              onPress={() => { navigate('Register') }}
             >
               <Text style={{
                 color: colors.primaryColor,

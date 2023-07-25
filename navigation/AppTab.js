@@ -16,10 +16,10 @@ const AppTab = () => {
 
     return <NavigationContainer>
         <Stack.Navigator initialRouteName='WelcomeScreen' screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={"WelcomeScreen"} component={WelcomeScreen} />
-            {/* <Stack.Screen name={'Login'} component={Login} />
+            <Stack.Screen name={'WelcomeScreen'} component={WelcomeScreen} />
+            <Stack.Screen name={'Login'} component={Login} />
             <Stack.Screen name={'Register'} component={Register} />
-            <Stack.Screen name={'UiTab'} component={UiTab} /> */}
+            <Stack.Screen name={'UiTab'} component={UiTab} />
         </Stack.Navigator>
     </NavigationContainer>
 }

@@ -5,11 +5,12 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import { images, icons } from "../constants";
 import { UiButton } from "../components";
 
-const WelcomeScreen = () => {
+const WelcomeScreen = (props) => {
 
   const [accountTypes, setActiveAccount] = useState([
     {
@@ -26,6 +27,12 @@ const WelcomeScreen = () => {
     }
   ])
 
+  //lấy prop từ navigation
+  const { navigation, route } = props
+  //hàm có sẵn từ navigation
+  const { navigate, goBack } = navigation
+
+
   return (
     <View className="bg-white flex-[100]">
       <ImageBackground
@@ -34,7 +41,8 @@ const WelcomeScreen = () => {
         className="flex-1"
       >
         <View className="flex-[20]">
-          <View className="flex-row items-center justify-start p-3">
+          <View className="flex-row items-center justify-start p-3"
+          style={{marginTop: Platform.OS === 'ios'? 40: 0}}>
             <Image
               source={icons.moon}
               className="w-[30px] h-[30px] ml-[10px] mr-[5px]"
@@ -69,11 +77,9 @@ const WelcomeScreen = () => {
           }
         </View>
         <View className="flex-[20] items-center">
-          <UiButton title={'login'.toUpperCase()} onPress={() => { alert('login') }} />
+          <UiButton title={'login'.toUpperCase()} onPress={() => { navigate("Login") }} />
           <Text>Want to register new account?</Text>
-          <TouchableOpacity onPress={() => {
-            alert('nhấn đăng ký')
-          }}>
+          <TouchableOpacity onPress={() => { navigate('Register') }} >
             <Text className="underline font-medium">Register</Text>
           </TouchableOpacity>
         </View>

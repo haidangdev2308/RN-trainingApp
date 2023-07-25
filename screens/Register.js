@@ -13,7 +13,7 @@ import { images, icons, colors } from "../constants";
 import { isValidEmail, isValidPassword, isValidRePassword } from '../Utilies/Validations'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const Register = () => {
+const Register = (props) => {
 
   const [keyboardIsShown, setKeyboardIsShown] = useState(false)
   //biến lỗi email, pw
@@ -39,6 +39,11 @@ const Register = () => {
       setKeyboardIsShown(false)
     })
   })
+
+  //lấy prop từ navigation
+  const { navigation, route } = props
+  //hàm có sẵn từ navigation
+  const { navigate, goBack } = navigation
 
   return (
     <KeyboardAwareScrollView className="flex-[100] p-5"
@@ -108,9 +113,7 @@ const Register = () => {
             <TouchableOpacity
               disabled={isValidationSuccess() == false}
 
-              onPress={() => {
-                alert('aaa')
-              }}
+              onPress={() => { navigate('Login') }}
               style={{
                 backgroundColor: isValidationSuccess() == true ? colors.primaryColor : colors.disable,
                 borderRadius: 20,
@@ -120,7 +123,7 @@ const Register = () => {
                 width: '65%',
                 alignSelf: 'center'
               }}>
-              <Text onPress={() => { }} className="text-white font-medium">Register</Text>
+              <Text className="text-white font-medium">Register</Text>
             </TouchableOpacity>
           </View>
         }
