@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator()
 const AppTab = () => {
 
     return <NavigationContainer>
-        <Stack.Navigator initialRouteName='WelcomeScreen' screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName='UiTab' screenOptions={{ headerShown: false }}>
             <Stack.Screen name={'WelcomeScreen'} component={WelcomeScreen} />
             <Stack.Screen name={'Login'} component={Login} />
             <Stack.Screen name={'Register'} component={Register} />

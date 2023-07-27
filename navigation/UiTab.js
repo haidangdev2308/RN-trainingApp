@@ -1,10 +1,16 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Settings, ProductListView, FoodList } from '../screens'
+import { Settings, ProductListView, FoodList, Profile } from '../screens'
 import { colors } from '../constants'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faListUl, faUtensils, faGear } from '@fortawesome/free-solid-svg-icons'
+import {
+    faListUl,
+    faUtensils,
+    faGear,
+    faUser,
+    faQuestion
+} from '@fortawesome/free-solid-svg-icons'
 
 const Tab = createBottomTabNavigator()
 const screenOptions = ({ route }) => ({
@@ -23,7 +29,10 @@ const screenOptions = ({ route }) => ({
         return <FontAwesomeIcon
             icon={screenName == 'ProductListView' ? faListUl
                 : screenName == 'FoodList' ? faUtensils
-                    : screenName == 'Settings' ? faGear : faGear}
+                    : screenName == 'Settings' ? faGear
+                        : screenName == 'Profile' ? faUser
+                            : faQuestion
+            }
             color={focused ? 'white' : colors.disable}
             size={22}
         />
@@ -56,7 +65,15 @@ const UiTab = (props) => {
                     tabBarLabelStyle: {
                         fontSize: 12
                     }
-                }} />
+                }}
+            />
+            <Tab.Screen name={'Profile'} component={Profile}
+                options={{
+                    tabBarLabelStyle: {
+                        fontSize: 12
+                    }
+                }}
+            />
         </Tab.Navigator>
     )
 }

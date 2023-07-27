@@ -4,6 +4,7 @@ import Register from "./Register";
 import FoodList from "./FoodList/FoodList";
 import ProductListView from "./ProductList/ProductListView";
 import Settings from "./Settings";
+import Profile from "./Profile";
 
 export {
     Login,
@@ -11,6 +12,6 @@ export {
     Register,
     FoodList,
     ProductListView,
-    Settings
-    
+    Settings,
+    Profile
 }
